@@ -1,0 +1,53 @@
+Show Commands for ASA/FTD commands for IPsec VPN: 
+
+show crypto ipsec stats
+show vpn-sessiondb license-summary
+show Version
+show run crypto map
+more system:running-config
+show run crypto ikev2
+show crypto isakmp sa 
+show vpn-sessiondb anyconnect
+show vpn-sessiondb detail l2l
+
+IKE S2S w/ IPsec show commands: 
+
+show crypto isakmp policy
+show crypto engine connections active
+show crypto isakmp keys
+show crypto map
+show crypto isakmp sa
+debug crypto isakmp
+debug crypto ipsec
+
+DMVPN Show commands: 
+
+show dmvpn
+show ip nhrp
+show crypto engine conenctions active
+show ip route
+show crypto mapshow ip cef [network]
+show crypto ipsec sashow crypto isakmp sa
+
+Flex VPN: 
+
+show crypto ikev2 proposal
+show crypto ikev2 sashow crypto ipsec transform-set
+show crypto ipsec profile
+show crypto ipsec sa 
+show crypto map
+
+GET VPN w/ Key Server:
+
+show crypto gdoi
+show crypto gdoi ks
+show crypto isakmp sa detail
+show crypto ipsec sa
+
+Remote Access VPNs:
+
+show crypto pki cert
+show ip int bri
+show ip route
+show crypto ikev2 sa
+show vpn-sessiondb remote
