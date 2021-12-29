@@ -1,0 +1,127 @@
+IKEv2 Configuration Steps:
+
+Keyring
+Proposal
+Profile
+Policy
+ACL
+Transform Set
+Crypto Map (including Peer, ACL, and Transform Set)
+Apply to interface
+
+show crypto ikev2
+show ip interface cirtual-access
+
+https://www.51sec.org/2017/09/19/cisco-router-ikev2-ipsec-vpn-configuration/
+
+
+### HQ config ###
+
+feature crypto ike
+
+crypto ikev2 keyring branch1
+ peer branch1
+  address 2.2.2.1
+  pre-shared-key cisco1234
+  
+  
+crypto ikev2 proposal prop-branch1
+ encryption aes-cbc-256
+ integrity sha256
+ group 19
+ 
+ crypto ikev2 profile branch
+ match identity remote address 2.2.2.1 255.255.255.255
+ authentication local pre-share
+ authentication remote pre-share
+ keyring local branch1
+ 
+ 
+crypto ikev2 policy pol-branch1
+ proposal prop-branch1
+ 
+ ip access-list extended VPNACL-branch
+ permit ip host 10.10.10.10 host 10.10.20.10
+ permit ip host 10.10.10.100 host 10.10.20.100
+ 
+ crypto ipsec transform-set ts-vpn esp-aes 256 esp-sha256-hmac
+ 
+ 
+ crypto map cmap-branch 10 ipsec-isakmp
+ set peer 2.2.2.1
+ set security-association lifetime seconds 3600
+ set transform-set ts-vpn
+ set pfs group19
+ set ikev2-profile branch
+ match address VPNACL-branch
+ 
+ interface GigabitEthernet1
+ ip address 1.1.1.1 255.255.255.0
+ negotiation auto
+ crypto map cmap-branch
+ 
+ ### branch config ###
+
+feature crypto ike
+
+crypto ikev2 keyring branch1
+ peer branch1
+  address 1.1.1.1
+  pre-shared-key cisco1234
+  
+  
+crypto ikev2 proposal prop-branch1
+ encryption aes-cbc-256
+ integrity sha256
+ group 19
+ 
+ crypto ikev2 profile branch
+ match identity remote address 1.1.1.1 255.255.255.255
+ authentication local pre-share
+ authentication remote pre-share
+ keyring local branch1
+ 
+ 
+crypto ikev2 policy pol-branch1
+ proposal prop-branch1
+ 
+ ip access-list extended VPNACL-branch
+ permit ip host 10.10.20.10 host 10.10.10.10
+ permit ip host 10.10.20.100 host 10.10.10.100
+ 
+ crypto ipsec transform-set ts-vpn esp-aes 256 esp-sha256-hmac
+ 
+ 
+ crypto map cmap-branch 10 ipsec-isakmp
+ set peer 1.1.1.1
+ set security-association lifetime seconds 86400
+ set transform-set ts-vpn
+ set pfs group19
+ set ikev2-profile branch
+ match address VPNACL-branch
+ 
+ interface GigabitEthernet1
+ ip address 2.2.2.2 255.255.255.0
+ negotiation auto
+ crypto map cmap-branch
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ deb crypto ikev2 packet
+deb crypto ikev2 internal
+
+show crypto ikev2 sa detailed 
+show crypto ipsec sa
+show crypto session
