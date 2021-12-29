@@ -1,0 +1,88 @@
+ROUTERS:
+term len 0
+show ver
+show lic
+show run
+show ip int bri
+show hardware
+show diag
+show inventory
+show cdp neighbor
+show cdp neighbor detail
+term len 100
+show ip route
+show clock
+show ntp ass
+show ntp status
+
+show ipv6 int brief
+show ipv6 route
+show ipv6 ospf interface
+show ipv6 ospf neighbor
+
+SWITCHES:
+term len 0
+show ver
+show run
+show vlan
+show vtp
+show int status
+show ip route
+show cdp neighbor
+show cdp neighbor detail
+show spanning-tree
+show clock
+show ntp ass
+show ntp status
+show switch (stacked)
+
+
+ASA:
+term pager 50
+more system:running-config
+
+
+VRFs:
+term len 0
+show version
+show running-config
+show vlan
+sho vtp status
+show int status
+show cdp neighbor
+show spanning-tree
+show clock
+show ntp associations
+term len 50
+show ip route
+term len 0
+sho ip vrf interfaces
+sho vrf ipv4 brief
+sho ip route vrf *
+sho ip ospf neighbor
+sho ip eigrp vrf * neighbors
+term len 50
+
+
+
+
+term len 0
+sho ver
+sho inventory
+sho license summary
+sho run
+sho int status
+sho ip int bri
+sho lldp ne
+sho lldp ne det
+sho cdp ne
+sho cdp ne det
+sho pow in
+sho clock
+sho vlan
+sho vtp status
+sho spanning-tree
+term len 1000
+sho ip rout vrf *
+
+wr
