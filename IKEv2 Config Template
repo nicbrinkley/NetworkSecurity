@@ -12,8 +12,6 @@ Apply to interface
 show crypto ikev2
 show ip interface cirtual-access
 
-https://www.51sec.org/2017/09/19/cisco-router-ikev2-ipsec-vpn-configuration/
-
 
 ### HQ config ###
 
